@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tareas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container">
+        <h2>Tareas</h2>
+        <ul>
+            <li th:each="tarea : ${tareas}">
+                <span th:text="${tarea.titulo}">Titulo de la tarea</span>
+            </li>
+        </ul>
+        <button onclick="location.href='/addtarea'">Add Tarea</button>
+        <button onclick="location.href='/'" class="btn btn-primary">Volver al inicio</button>
+    </div>
+</body>
+</html>

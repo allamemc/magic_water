@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Tarea</title>
+</head>
+<body>
+    <h2>Add Tarea</h2>
+    <form action="#" th:action="@{/addtarea}" th:object="${tarea}" method="post">
+    <label for="titulo">Titulo:</label><br>
+    <input type="text" id="titulo" name="titulo" th:field="*{titulo}"><br>
+    <label for="descripcion">Descripcion:</label><br>
+    <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"><br>
+    <input type="hidden" th:field="*{usuario.NIF}" th:value="${user.NIF}">
+    <label for="proyecto">Proyecto:</label><br>
+    <select id="proyecto" name="proyecto" th:field="*{proyecto.idproyecto}">
+        <option th:each="proyecto : ${proyectos}" th:value="${proyecto.idproyecto}" th:text="${proyecto.nombre}"></option>
+    </select>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
