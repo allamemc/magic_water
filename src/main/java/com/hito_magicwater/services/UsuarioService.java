@@ -21,7 +21,7 @@ public class UsuarioService {
     public void insertUsuarios() {
         Usuario usuario1 = new Usuario();
         usuario1.setNIF("12345678A");
-        usuario1.setNombre("Juan");
+        usuario1.setNombre("Juan Pérez");
         usuario1.setApellidos("Perez");
         usuario1.setEmail("juan.perez@example.com");
         usuario1.setTlf("123456789");
@@ -33,7 +33,7 @@ public class UsuarioService {
 
         Usuario usuario2 = new Usuario();
         usuario2.setNIF("23456789B");
-        usuario2.setNombre("Maria");
+        usuario2.setNombre("Maria Gomez");
         usuario2.setApellidos("Gomez");
         usuario2.setEmail("maria.gomez@example.com");
         usuario2.setTlf("234567890");
@@ -45,7 +45,7 @@ public class UsuarioService {
 
         Usuario usuario3 = new Usuario();
         usuario3.setNIF("34567890C");
-        usuario3.setNombre("Carlos");
+        usuario3.setNombre("Carlos Rodriguez");
         usuario3.setApellidos("Rodriguez");
         usuario3.setEmail("carlos.rodriguez@example.com");
         usuario3.setTlf("345678901");
@@ -57,7 +57,7 @@ public class UsuarioService {
 
         Usuario usuario4 = new Usuario();
         usuario4.setNIF("45678901D");
-        usuario4.setNombre("Ana");
+        usuario4.setNombre("Ana Martinez");
         usuario4.setApellidos("Martinez");
         usuario4.setEmail("ana.martinez@example.com");
         usuario4.setTlf("456789012");
@@ -69,7 +69,7 @@ public class UsuarioService {
 
         Usuario usuario5 = new Usuario();
         usuario5.setNIF("56789012E");
-        usuario5.setNombre("Pedro");
+        usuario5.setNombre("Pedro Gonzalez");
         usuario5.setApellidos("Gonzalez");
         usuario5.setEmail("pedro.gonzalez@example.com");
         usuario5.setTlf("567890123");

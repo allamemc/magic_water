@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Index</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100">
-    <div class="container">
+<body >
+    <div >
         <h2>Welcome, <span th:text="${user.nombre}">User</span>!</h2>
         <a th:href="@{/proyectos}">Ver proyectos</a>
         <a th:href="@{/tareas}">Ver tareas</a>

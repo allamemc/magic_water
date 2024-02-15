@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Tareas</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100">
-    <div class="container">
+<body >
+    <div >
         <h2>Tareas</h2>
         <ul>
             <li th:each="tarea : ${tareas}">
@@ -13,6 +13,7 @@
                 <span th:text="${tarea.descripcion}">Descripcion de la tarea</span>
                 <span th:text="${tarea.estado}">Estado de la tarea</span>
                 <span th:text="${tarea.proyecto.nombre}">Proyecto de la tarea</span>
+                <span th:text="${tarea.usuario.nombre}">Usuario de la tarea</span>
                 <button th:onclick="'window.location.href=\'/editartarea?idtarea=' + ${tarea.idtarea} + '\''">Edit</button>
                 <button th:onclick="'window.location.href=\'/deletetarea?idtarea=' + ${tarea.idtarea} + '\''">Delete</button>
             </li>
