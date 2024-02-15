@@ -155,7 +155,7 @@ public class Controlador {
                 tarea.setTitulo(nombreTarea);
                 tarea.setDescripcion("Pendiente de descripción");
                 tarea.setUsuario(usuario);
-                tarea.setEstado("pendiente");
+                tarea.setEstado("Pendiente");
                 tarea.setInicioprevisto(new java.sql.Date(proyecto.getFecha().getTime()));
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(proyecto.getFecha());

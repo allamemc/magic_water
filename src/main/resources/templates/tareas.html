@@ -2,24 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Tareas</title>
-
+    <!-- Incluyendo Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f8f9fa; /* Cambia el color de fondo */
+        }
+        .card {
+            margin-top: 50px; /* Espacio arriba de la card */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Color de fondo de la card */
+            padding: 20px; /* Agrega padding a la card */
+        }
+        .card-title {
+            font-size: 24px; /* Aumenta el tamaño de la fuente del título */
+            font-weight: bold; /* Hace el título en negrita */
+            margin-bottom: 20px; /* Espacio debajo del título */
+        }
+        .card-text {
+            font-size: 16px; /* Aumenta el tamaño de la fuente del texto */
+            margin-bottom: 10px; /* Espacio debajo del texto */
+        }
+        .btn {
+            margin-top: 10px; /* Espacio arriba de los botones */
+            width: 100%; /* Hace que los botones ocupen todo el ancho */
+        }
+    </style>
 </head>
-<body >
-    <div >
-        <h2>Tareas</h2>
-        <ul>
-            <li th:each="tarea : ${tareas}">
-                <span th:text="${tarea.titulo}">Titulo de la tarea</span>
-                <span th:text="${tarea.descripcion}">Descripcion de la tarea</span>
-                <span th:text="${tarea.estado}">Estado de la tarea</span>
-                <span th:text="${tarea.proyecto.nombre}">Proyecto de la tarea</span>
-                <span th:text="${tarea.usuario.nombre}">Usuario de la tarea</span>
-                <button th:onclick="'window.location.href=\'/editartarea?idtarea=' + ${tarea.idtarea} + '\''">Edit</button>
-                <button th:onclick="'window.location.href=\'/deletetarea?idtarea=' + ${tarea.idtarea} + '\''">Delete</button>
-            </li>
-        </ul>
-        <button th:if="${user.permiso != 'supervisor'}" onclick="location.href='/addtarea'">Add Tarea</button>
-        <button onclick="location.href='/'" class="btn btn-primary">Volver al inicio</button>
+<body>
+    <div class="container">
+        <h2 class="text-center">Tareas</h2>
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <div th:each="tarea : ${tareas}" class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${tarea.titulo}">Titulo de la tarea</h5>
+                        <p class="card-text" th:text="${tarea.descripcion}">Descripcion de la tarea</p>
+                        <p class="card-text"><small th:text="${tarea.proyecto.nombre}">Proyecto: Nombre del proyecto</small></p>
+                        <p class="card-text"><small th:text="${tarea.usuario.nombre}">Usuario: Nombre del usuario</small></p>
+                        <span th:classappend="${(tarea.estado == 'Pendiente')} ? 'badge-warning' : ((${tarea.estado == 'Finalizada'}) ? 'badge-success' : 'badge-danger')" th:text="${tarea.estado}" class="badge">Estado de la tarea</span>
+                        <p class="card-text"><small th:text="${tarea.inicioprevisto}">Inicio Previsto</small></p>
+                        <p class="card-text"><small th:text="${tarea.finprevisto}">Fin Previsto</small></p>
+                        <button class="btn btn-primary" th:if="${user.permiso != 'supervisor'}" th:onclick="'window.location.href=\'/editartarea?idtarea=' + ${tarea.idtarea} + '\''">Editar</button>
+                        <button class="btn btn-danger" th:if="${user.permiso != 'supervisor'}" th:onclick="'window.location.href=\'/deletetarea?idtarea=' + ${tarea.idtarea} + '\''">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button class="btn btn-primary" th:if="${user.permiso != 'supervisor'}" onclick="location.href='/addtarea'">Añadir Tarea</button>
+            <button class="btn btn-secondary" onclick="location.href='/'">Volver al inicio</button>
+        </div>
     </div>
+    <!-- Incluyendo Bootstrap JS (opcional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

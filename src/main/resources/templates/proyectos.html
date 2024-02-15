@@ -2,24 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Proyectos</title>
-
+    <!-- Incluyendo Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f8f9fa; /* Cambia el color de fondo */
+        }
+        .card {
+            margin-top: 50px; /* Espacio arriba de la card */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Color de fondo de la card */
+            height: 300px;
+        }
+        .card-body {
+            text-align: center; /* Centra el contenido de la card */
+        }
+        .btn-container {
+            text-align: center; /* Centra los botones */
+            margin-top: 20px; /* Espacio arriba de los botones */
+        }
+        .btn {
+            margin: 5px; /* Espacio entre los botones */
+        }
+    </style>
 </head>
 <body>
-    <h2>Proyectos</h2>
-    <div >
-        <div th:each="proyecto : ${proyectos}" class="col-sm-4">
-            <div >
-                <div >
-                    <h5  th:text="${proyecto.nombre}">Nombre del proyecto</h5>
-                    <p  th:text="${proyecto.descripcion}">Descripcion del proyecto</p>
-                    <p ><small  th:text="${proyecto.zona}">Zona del proyecto</small></p>
-                    <p ><small  th:text="${proyecto.fecha}">Fecha del proyecto</small></p>
+    <div class="container">
+        <h2 class="text-center">Proyectos</h2>
+        <div class="row justify-content-center">
+            <div class="col-sm-4" th:each="proyecto : ${proyectos}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${proyecto.nombre}">Nombre del proyecto</h5>
+                        <p class="card-text" th:text="${proyecto.descripcion}">Descripcion del proyecto</p>
+                        <p><small th:text="${proyecto.zona}">Zona del proyecto</small></p>
+                        <p><small th:text="${proyecto.fecha}">Fecha del proyecto</small></p>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="btn-container">
+            <button class="btn btn-primary" th:if="${user.permiso != 'supervisor'}" onclick="location.href='/addproyecto'">Añadir Proyecto</button>
+            <button class="btn btn-secondary" onclick="location.href='/'">Volver al inicio</button>
+        </div>
     </div>
-    <button th:if="${user.permiso != 'supervisor'}" onclick="location.href='/addproyecto'">Add Proyecto</button>
-
-    <button onclick="location.href='/'" >Volver al inicio</button>
+    <!-- Incluyendo Bootstrap JS (opcional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
