@@ -10,6 +10,8 @@
     <input type="text" id="titulo" name="titulo" th:field="*{titulo}"><br>
     <label for="descripcion">Descripcion:</label><br>
     <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"><br>
+        <label for="estado">Estado:</label><br>
+    <input type="text" id="estado" name="estado" th:field="*{estado}"><br>
     <input type="hidden" th:field="*{usuario.NIF}" th:value="${user.NIF}">
     <label for="proyecto">Proyecto:</label><br>
     <select id="proyecto" name="proyecto" th:field="*{proyecto.idproyecto}">

@@ -18,6 +18,8 @@
             </div>
         </div>
     </div>
+    <button th:if="${user.permiso != 'supervisor'}" onclick="location.href='/addproyecto'">Add Proyecto</button>
+
     <button onclick="location.href='/'" class="btn btn-primary">Volver al inicio</button>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Tarea</title>
+</head>
+<body>
+<h2>Edit Tarea</h2>
+<form action="#" th:action="@{/editartarea}" th:object="${tarea}" method="post">
+    <input type="hidden" th:field="*{idtarea}"/>
+    <label for="titulo">Titulo:</label><br>
+    <input type="text" id="titulo" name="titulo" th:field="*{titulo}"><br>
+    <label for="descripcion">Descripcion:</label><br>
+    <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"><br>
+    <label for="estado">Estado:</label><br>
+    <input type="text" id="estado" name="estado" th:field="*{estado}"><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

@@ -17,7 +17,10 @@ import javax.sql.DataSource;
 @Configuration
 public class DatabaseWebSecurity  {
 
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public UserDetailsManager users(DataSource dataSource) {

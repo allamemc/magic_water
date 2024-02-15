@@ -9,9 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.Authentication;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,33 +55,76 @@ public class Controlador {
     @RequestMapping("/tareas")
     public ModelAndView peticionTareas(Authentication aut) {
         ModelAndView mv = new ModelAndView();
-        List<Tarea> tareas = tareaRepository.findAll();
-        mv.addObject("tareas", tareas);
-        mv.setViewName("tareas");
-
         if (aut == null) {
-            mv.addObject("user", null);
+            mv.setViewName("login");
         } else {
-            mv.addObject("user", login);
-        }
+            Usuario usuario = usuarioRepository.findById(aut.getName()).get();
+            if (usuario.getPermiso().equals("supervisor")) {
+                List<Tarea> tareas = tareaRepository.findAll();
+                mv.addObject("tareas", tareas);
+                mv.addObject("user", usuario);
+            } else {
+                List<Tarea> tareas = tareaRepository.findByUsuario(usuario);
+                mv.addObject("tareas", tareas);
+                mv.addObject("user", usuario);
+                mv.setViewName("tareas");
+            }
 
+        }
+        return mv;
+    }
+
+    @RequestMapping("/proyectos")
+    public ModelAndView peticionProyectos(Authentication aut) {
+        ModelAndView mv = new ModelAndView();
+        if (aut == null) {
+            mv.setViewName("login");
+        } else {
+            List<Proyecto> proyectos = proyectoRepository.findAll();
+            Usuario usuario = usuarioRepository.findById(aut.getName()).get();
+            mv.addObject("proyectos", proyectos);
+            mv.addObject("user", usuario);
+            mv.setViewName("proyectos");
+
+        }
         return mv;
     }
 
     @RequestMapping("/addtarea")
     public ModelAndView peticionAddTarea(Authentication aut) {
         ModelAndView mv = new ModelAndView();
+        Usuario usuario = usuarioRepository.findById(aut.getName()).get();
         if (aut == null) {
             mv.setViewName("login");
+        } else if (usuario.getPermiso().equals("supervisor")) {
+            mv.setViewName("redirect:/tareas");
         } else {
             Tarea tarea = new Tarea();
-            Usuario usuario = usuarioRepository.findById(aut.getName()).get();
+
             List<Proyecto> proyectos = proyectoRepository.findAll(); // Aquí recuperas todos los proyectos disponibles
             tarea.setUsuario(usuario);
             mv.addObject("tarea", tarea);
             mv.addObject("proyectos", proyectos); // Aquí añades los proyectos al modelo
             mv.addObject("user", usuario);
             mv.setViewName("addtarea");
+        }
+        return mv;
+    }
+
+    @RequestMapping("/addproyecto")
+    public ModelAndView peticionAddProyecto(Authentication aut) {
+        ModelAndView mv = new ModelAndView();
+        Usuario usuario = usuarioRepository.findById(aut.getName()).get();
+        if (aut == null) {
+            mv.setViewName("login");
+        } else if (usuario.getPermiso().equals("supervisor")) {
+            mv.setViewName("redirect:/proyectos");
+        } else {
+            Proyecto proyecto = new Proyecto();
+
+            mv.addObject("proyecto", proyecto);
+            mv.addObject("user", usuario);
+            mv.setViewName("addproyecto");
         }
         return mv;
     }
@@ -95,12 +141,77 @@ public class Controlador {
         return mv;
     }
 
-    @RequestMapping("/proyectos")
-    public ModelAndView peticionProyectos() {
+    @RequestMapping(value = "/addproyecto", method = RequestMethod.POST)
+    public ModelAndView peticionAddProyectoPost(@ModelAttribute Proyecto proyecto, Authentication aut) {
         ModelAndView mv = new ModelAndView();
-        List<Proyecto> proyectos = proyectoRepository.findAll();
-        mv.addObject("proyectos", proyectos);
-        mv.setViewName("proyectos");
+        if (aut == null) {
+            mv.setViewName("login");
+        } else {
+            proyectoRepository.save(proyecto);
+            String[] nombresTareas = {"Recolección de muestras", "Análisis de laboratorio", "Interpretación de resultados", "Elaboración del informe"};
+            Usuario usuario = usuarioRepository.findById(aut.getName()).get();
+            for (String nombreTarea : nombresTareas) {
+                Tarea tarea = new Tarea();
+                tarea.setTitulo(nombreTarea);
+                tarea.setDescripcion("Pendiente de descripción");
+                tarea.setUsuario(usuario);
+                tarea.setEstado("pendiente");
+                tarea.setInicioprevisto(new java.sql.Date(proyecto.getFecha().getTime()));
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(proyecto.getFecha());
+                calendar.add(Calendar.DAY_OF_MONTH, 30);
+                Date fechaFinPrevista = new Date(calendar.getTimeInMillis());
+                tarea.setFinprevisto(fechaFinPrevista);
+                tarea.setProyecto(proyecto);
+                tareaRepository.save(tarea);
+            }
+            mv.setViewName("redirect:/proyectos");
+        }
+        return mv;
+    }
+
+    @RequestMapping("/editartarea")
+    public ModelAndView peticionEditarTarea(Authentication aut, @RequestParam("idtarea") Long idtarea) {
+        ModelAndView mv = new ModelAndView();
+        if (aut == null) {
+            mv.setViewName("login");
+        } else {
+            Optional<Tarea> tarea = tareaRepository.findById(idtarea);
+            mv.addObject("tarea", tarea.get());
+            mv.setViewName("editartarea");
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/editartarea", method = RequestMethod.POST)
+    public ModelAndView peticionEditarTareaPost(@ModelAttribute Tarea tareaForm, Authentication aut) {
+        ModelAndView mv = new ModelAndView();
+        if (aut == null) {
+            mv.setViewName("login");
+        } else {
+            Optional<Tarea> tareaOptional = tareaRepository.findById((long) tareaForm.getIdtarea());
+            if (tareaOptional.isPresent()) {
+                Tarea tarea = tareaOptional.get();
+                tarea.setTitulo(tareaForm.getTitulo());
+                tarea.setDescripcion(tareaForm.getDescripcion());
+                tarea.setEstado(tareaForm.getEstado());
+                // Actualiza aquí cualquier otro campo que se envíe desde el formulario
+                tareaRepository.save(tarea);
+            }
+            mv.setViewName("redirect:/tareas");
+        }
+        return mv;
+    }
+
+    @RequestMapping("/deletetarea")
+    public ModelAndView peticionBorrarTarea(Authentication aut, @RequestParam("idtarea") Long idtarea) {
+        ModelAndView mv = new ModelAndView();
+        if (aut == null) {
+            mv.setViewName("login");
+        } else {
+            tareaRepository.deleteById(idtarea);
+            mv.setViewName("redirect:/tareas");
+        }
         return mv;
     }
 

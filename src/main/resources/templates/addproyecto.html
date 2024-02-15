@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Proyecto</title>
+</head>
+<body>
+    <h2>Add Proyecto</h2>
+    <form action="#" th:action="@{/addproyecto}" th:object="${proyecto}" method="post">
+    <label for="titulo">Titulo:</label><br>
+    <input type="text" id="titulo" name="titulo" th:field="*{nombre}"><br>
+    <label for="descripcion">Descripcion:</label><br>
+    <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"><br>
+    <label for="zona">Zona:</label><br>
+    <input type="text" id="zona" name="zona" th:field="*{zona}"><br>
+    <label for="fecha">Fecha:</label><br>
+    <input type="date" id="fecha" name="fecha" th:field="*{fecha}"><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

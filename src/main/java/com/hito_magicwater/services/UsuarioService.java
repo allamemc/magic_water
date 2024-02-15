@@ -13,6 +13,8 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @PostConstruct
@@ -23,7 +25,7 @@ public class UsuarioService {
         usuario1.setApellidos("Perez");
         usuario1.setEmail("juan.perez@example.com");
         usuario1.setTlf("123456789");
-        usuario1.setPassword("{noop}123");
+        usuario1.setPassword(passwordEncoder.encode("123"));
         usuario1.setActivo(true);
         usuario1.setPermiso("trabajador");
         usuario1.setCategoria("Ingeniero");
@@ -35,7 +37,7 @@ public class UsuarioService {
         usuario2.setApellidos("Gomez");
         usuario2.setEmail("maria.gomez@example.com");
         usuario2.setTlf("234567890");
-        usuario2.setPassword("{noop}123");
+        usuario2.setPassword(passwordEncoder.encode("123"));
         usuario2.setActivo(true);
         usuario2.setPermiso("trabajador");
         usuario2.setCategoria("Analista");
@@ -47,7 +49,7 @@ public class UsuarioService {
         usuario3.setApellidos("Rodriguez");
         usuario3.setEmail("carlos.rodriguez@example.com");
         usuario3.setTlf("345678901");
-        usuario3.setPassword("{noop}123");
+        usuario3.setPassword(passwordEncoder.encode("123"));
         usuario3.setActivo(true);
         usuario3.setPermiso("trabajador");
         usuario3.setCategoria("Ingeniero");
@@ -59,7 +61,7 @@ public class UsuarioService {
         usuario4.setApellidos("Martinez");
         usuario4.setEmail("ana.martinez@example.com");
         usuario4.setTlf("456789012");
-        usuario4.setPassword("{noop}123");
+        usuario4.setPassword(passwordEncoder.encode("123"));
         usuario4.setActivo(true);
         usuario4.setPermiso("trabajador");
         usuario4.setCategoria("Analista");
@@ -71,7 +73,7 @@ public class UsuarioService {
         usuario5.setApellidos("Gonzalez");
         usuario5.setEmail("pedro.gonzalez@example.com");
         usuario5.setTlf("567890123");
-        usuario5.setPassword("{noop}123");
+        usuario5.setPassword(passwordEncoder.encode("123"));
         usuario5.setActivo(true);
         usuario5.setPermiso("supervisor");
         usuario5.setCategoria("Ingeniero");

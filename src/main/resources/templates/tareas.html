@@ -10,9 +10,14 @@
         <ul>
             <li th:each="tarea : ${tareas}">
                 <span th:text="${tarea.titulo}">Titulo de la tarea</span>
+                <span th:text="${tarea.descripcion}">Descripcion de la tarea</span>
+                <span th:text="${tarea.estado}">Estado de la tarea</span>
+                <span th:text="${tarea.proyecto.nombre}">Proyecto de la tarea</span>
+                <button th:onclick="'window.location.href=\'/editartarea?idtarea=' + ${tarea.idtarea} + '\''">Edit</button>
+                <button th:onclick="'window.location.href=\'/deletetarea?idtarea=' + ${tarea.idtarea} + '\''">Delete</button>
             </li>
         </ul>
-        <button onclick="location.href='/addtarea'">Add Tarea</button>
+        <button th:if="${user.permiso != 'supervisor'}" onclick="location.href='/addtarea'">Add Tarea</button>
         <button onclick="location.href='/'" class="btn btn-primary">Volver al inicio</button>
     </div>
 </body>
