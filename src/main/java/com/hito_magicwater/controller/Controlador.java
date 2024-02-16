@@ -195,6 +195,8 @@ public class Controlador {
                 tarea.setTitulo(tareaForm.getTitulo());
                 tarea.setDescripcion(tareaForm.getDescripcion());
                 tarea.setEstado(tareaForm.getEstado());
+                tarea.setInicioprevisto(tareaForm.getInicioprevisto());
+                tarea.setFinprevisto(tareaForm.getFinprevisto());
                 // Actualiza aquí cualquier otro campo que se envíe desde el formulario
                 tareaRepository.save(tarea);
             }
