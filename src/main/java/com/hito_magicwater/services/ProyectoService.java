@@ -59,6 +59,18 @@ public class ProyectoService {
                 e.printStackTrace();
             }
             proyectoRepository.save(proyecto3);
+
+            Proyecto proyecto4 = new Proyecto();
+
+            proyecto4.setNombre("Sin proyecto");
+            proyecto4.setDescripcion("No relacionado con proyectos");
+            proyecto4.setZona("Trabajador");
+            try {
+                proyecto4.setFecha(new Date(sdf.parse("2023-11-01").getTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            proyectoRepository.save(proyecto4);
         }
 
     }
