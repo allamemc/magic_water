@@ -3,59 +3,54 @@
 <head>
     <title>Añadir Proyecto</title>
     <!-- Incluyendo Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
     <style>
-        /* Estilos personalizados */
-        body {
-            background-color: #f8f9fa; /* Cambia el color de fondo */
-        }
-        .form-container {
-            margin-top: 50px; /* Espacio arriba del formulario */
-            max-width: 400px; /* Ancho máximo del formulario */
-            margin-left: auto;
-            margin-right: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #fff; /* Color de fondo del formulario */
-        }
-        .form-label {
-            font-weight: bold; /* Negrita para etiquetas */
-        }
-        .form-control {
-            margin-bottom: 10px; /* Espacio entre los campos */
-        }
-        .btn-submit {
-            margin-top: 10px; /* Espacio arriba del botón */
+        .general {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="text-center">Añadir Proyecto</h2>
-        <div class="form-container">
-            <form th:action="@{/addproyecto}" th:object="${proyecto}" method="post">
-                <div class="form-group">
-                    <label for="titulo" class="form-label">Titulo:</label>
-                    <input type="text" id="titulo" name="titulo" th:field="*{nombre}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="descripcion" class="form-label">Descripcion:</label>
-                    <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="zona" class="form-label">Zona:</label>
-                    <input type="text" id="zona" name="zona" th:field="*{zona}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="fecha" class="form-label">Fecha:</label>
-                    <input type="date" id="fecha" name="fecha" th:field="*{fecha}" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-primary btn-submit">Enviar</button>
-            </form>
-        </div>
+<div class="general">
+    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <form class="space-y-6" th:action="@{/addproyecto}" th:object="${proyecto}" method="post">
+            <h5 class="text-xl font-medium text-gray-900 dark:text-white">Añadir Proyecto</h5>
+            <div>
+                <label for="titulo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo:</label>
+                <input type="text" id="titulo" name="titulo" th:field="*{nombre}"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                       required>
+            </div>
+            <div>
+                <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripcion:</label>
+                <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                       required>
+            </div>
+            <div>
+                <label for="zona" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zona:</label>
+                <input type="text" id="zona" name="zona" th:field="*{zona}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+            </div>
+            <div class="relative max-w-sm">
+                <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha del Proyecto:</label>
+
+                <input type="date" th:field="*{fecha}" id="date"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full                                                                                                                                                                                                                                  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                       placeholder="Fecha del Proyecto" required>
+            </div>
+            <button type="submit"
+                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Enviar
+            </button>
+            <button type="button"  th:href="@{/proyectos}" class="w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Cancelar</button>
+
+        </form>
+
     </div>
-    <!-- Incluyendo Bootstrap JS (opcional) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+<!-- Incluyendo Bootstrap JS (opcional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 </html>
