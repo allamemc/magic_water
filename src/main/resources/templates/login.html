@@ -3,48 +3,48 @@
 <head>
     <title>Login</title>
     <!-- Incluyendo Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
     <style>
-        /* Estilos personalizados */
-        body {
-            background-color: #f8f9fa; /* Cambia el color de fondo */
-        }
-        .card {
-            margin-top: 100px; /* Centra la tarjeta verticalmente */
-            max-width: 400px; /* Define el ancho máximo de la tarjeta */
-            margin-left: auto;
-            margin-right: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #fff; /* Color de fondo de la tarjeta */
-        }
-        .form-control {
-            margin-bottom: 10px; /* Espacio entre los campos */
-        }
+    .general {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title text-center">Inicio de Sesión</h2>
-                <form th:action="@{/login}" method="post">
-                    <div class="form-group">
-                        <label for="username">NIF:</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                </form>
+
+<div class="general">
+    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <form class="space-y-6" th:action="@{/login}" method="post" >
+            <h5 class="text-xl font-medium text-gray-900 dark:text-white">Inicio de Sesión</h5>
+            <div>
+                <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Introduza su
+                    DNI</label>
+                <input type="text" name="username" id="username"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                       placeholder="11111111A" required/>
             </div>
-        </div>
+            <div>
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Introduza su
+                    contraseña</label>
+                <input type="password" name="password" id="password" placeholder="••••••••"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                       required/>
+            </div>
+
+            <button type="submit"
+                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Iniciar Sesión
+            </button>
+
+        </form>
     </div>
-    <!-- Incluyendo Bootstrap JS (opcional) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<!-- Incluyendo Bootstrap JS (opcional) -->
+
 </body>
 </html>

@@ -2,46 +2,94 @@
 <html xmlns:th="http://www.thymeleaf.org" data-theme="coffee">
 <head>
     <title>Index</title>
-    <!-- Incluyendo Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Incluyendo Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
     <style>
-        /* Estilos personalizados */
-        body {
-            background-color: #f8f9fa; /* Cambia el color de fondo */
-        }
-        .card {
-            margin-top: 100px; /* Centra la tarjeta verticalmente */
-            max-width: 400px; /* Define el ancho máximo de la tarjeta */
-            margin-left: auto;
-            margin-right: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #fff; /* Color de fondo de la tarjeta */
-        }
-        .card-title {
-            margin-bottom: 20px; /* Espacio debajo del título */
-            text-align: center; /* Centra el texto */
-        }
-        .btn-primary, .btn-danger{
-            display: block;
-            width: 100%;
-            margin-bottom: 10px; /* Espacio entre los botones */
+        ion-icon {
+            font-size: 32px;
+            vertical-align: middle;
+            color: dodgerblue;
         }
     </style>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title">Bienvenido, <span th:text="${user.nombre}">User</span>!</h2>
-                <a class="btn btn-primary " th:href="@{/proyectos}">Ver proyectos</a>
-                <a class="btn btn-primary " th:href="@{/tareas}">Ver tareas</a>
-                <a class="btn btn-danger " th:href="@{/logout}">Logout</a>
-            </div>
+
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a th:href="@{/}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <ion-icon name="rainy"></ion-icon>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Magic Water</span>
+        </a>
+        <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                    <a th:href="@{/}"
+                       class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                       aria-current="page">Inicio</a>
+                </li>
+                <li>
+                    <a th:href="@{/proyectos}"
+                       class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Proyectos</a>
+                </li>
+                <li>
+                    <a th:href="@{/tareas}"
+                       class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Tareas</a>
+                </li>
+                <li>
+                    <a th:href="@{/logout}"
+                       class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Cerrar
+                        Sesión</a>
+
+                </li>
+
+            </ul>
         </div>
     </div>
-    <!-- Incluyendo Bootstrap JS (opcional) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</nav>
+<section class="bg-white dark:bg-gray-900">
+    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <div class="mr-auto place-self-center lg:col-span-7"><h1
+                class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+            Magic Water, tu compañía de depuración de aguas</h1>
+            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">En Magic
+                Water, nos especializamos en la depuración de aguas para proporcionar soluciones de agua limpia y segura
+                a nivel mundial.</p>
+            <a th:href="@{/tareas}"
+               class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                Ver Tareas
+                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </a>
+            <a th:href="@{/proyectos}"
+               class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                Proyectos
+            </a>
+        </div>
+        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+            <img src="https://www.imagella.com/cdn/shop/products/5079e548ffc68a014ef2f3c4d36a3106.jpg?v=1692614724"
+                 alt="mockup">
+        </div>
+    </div>
+</section>
+
+
+<!-- Incluyendo Flowbite JS (opcional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Tarea</title>
+    <!-- Incluyendo Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f8f9fa; /* Cambia el color de fondo */
+        }
+
+        .form-container {
+            margin-top: 50px; /* Espacio arriba del formulario */
+            max-width: 400px; /* Ancho máximo del formulario */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Color de fondo del formulario */
+        }
+
+        .form-label {
+            font-weight: bold; /* Negrita para etiquetas */
+        }
+
+        .form-control {
+            margin-bottom: 10px; /* Espacio entre los campos */
+        }
+
+        .btn-submit {
+            margin-top: 10px; /* Espacio arriba del botón */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Editar Tarea</h2>
+    <div class="form-container">
+        <form th:action="@{/editartarea}" th:object="${tarea}" method="post">
+            <input type="hidden" th:field="*{idtarea}"/>
+            <div class="form-group">
+                <label for="titulo" class="form-label">Titulo:</label>
+                <input type="text" id="titulo" name="titulo" th:field="*{titulo}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="descripcion" class="form-label">Descripcion:</label>
+                <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="estado" class="form-label">Estado:</label>
+                <select id="estado" name="estado" th:field="*{estado}" class="form-control">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Finalizada">Finalizada</option>
+                    <option value="Parada">Parada</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fechai" class="form-label">Inicio Previsto:</label>
+                <input type="date" id="fechai" name="fechai" th:field="*{inicioprevisto}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="fechaf" class="form-label">Fin Previsto:</label>
+                <input type="date" id="fechaf" name="fechaf" th:field="*{finprevisto}" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit">Enviar</button>
+        </form>
+    </div>
+</div>
+<!-- Incluyendo Bootstrap JS (opcional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

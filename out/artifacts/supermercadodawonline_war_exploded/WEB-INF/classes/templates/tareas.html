@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tareas</title>
+    <!-- Incluyendo Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos personalizados */
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .card-text {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            margin-top: 10px;
+            width: 80px; /* Reduce el tamaño de los botones */
+            font-size: 12px; /* Reduce el tamaño de la fuente de los botones */
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Tareas</h2>
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <div th:each="tarea : ${tareas}" class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${tarea.titulo}">Titulo de la tarea</h5>
+                        <p class="card-text" th:text="${tarea.descripcion}">Descripcion de la tarea</p>
+                        <p class="card-text"><small th:text="${tarea.proyecto.nombre}">Proyecto: Nombre del proyecto</small></p>
+                        <p class="card-text"><small th:text="${tarea.usuario.nombre}">Usuario: Nombre del usuario</small></p>
+                        <span th:classappend="${(tarea.estado == 'Pendiente')} ? 'badge-warning' : ((${tarea.estado == 'Finalizada'}) ? 'badge-success' : 'badge-danger')" th:text="${tarea.estado}" class="badge">Estado de la tarea</span>
+                        <p class="card-text"><small th:text="${tarea.inicioprevisto}">Inicio Previsto</small></p>
+                        <p class="card-text"><small th:text="${tarea.finprevisto}">Fin Previsto</small></p>
+                        <div class="btn-container">
+                            <button class="btn btn-primary" th:if="${user.permiso != 'supervisor'}" th:onclick="'window.location.href=\'/editartarea?idtarea=' + ${tarea.idtarea} + '\''">Editar</button>
+                            <button class="btn btn-danger" th:if="${user.permiso != 'supervisor'}" th:onclick="'window.location.href=\'/deletetarea?idtarea=' + ${tarea.idtarea} + '\''">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button class="btn btn-primary" th:if="${user.permiso != 'supervisor'}" onclick="location.href='/addtarea'">Añadir Tarea</button>
+            <button class="btn btn-secondary" onclick="location.href='/'">Volver al inicio</button>
+        </div>
+    </div>
+    <!-- Incluyendo Bootstrap JS (opcional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
